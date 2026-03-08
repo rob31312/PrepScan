@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <item
+        android:id="@+id/action_home"
+        android:icon="@drawable/ic_home"
+        android:title="Home"
+        android:showAsAction="always" />
+    <item
+        android:id="@+id/action_container_options"
+        android:icon="@drawable/ic_settings"
+        android:title="Container options"
+        android:showAsAction="always" />
+</menu>

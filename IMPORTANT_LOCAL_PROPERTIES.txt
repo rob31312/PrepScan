@@ -1,0 +1,1 @@
+This zip excludes local.properties. Create it locally to point to your Android SDK.

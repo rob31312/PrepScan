@@ -1,0 +1,40 @@
+<resources>
+    <!-- Display names only, letters are derived in code -->
+    <string-array name="content_type_names">
+        <item>Food</item>
+        <item>Medical</item>
+        <item>Clothing</item>
+        <item>Water</item>
+        <item>Defense</item>
+        <item>Shelter</item>
+        <item>Electronics</item>
+        <item>General survival gear</item>
+    </string-array>
+
+    <string-array name="content_type_letters">
+        <item>F</item>
+        <item>M</item>
+        <item>C</item>
+        <item>W</item>
+        <item>D</item>
+        <item>S</item>
+        <item>E</item>
+        <item>G</item>
+    </string-array>
+
+    <string-array name="container_type_names">
+        <item>Small Bin</item>
+        <item>Large Bin</item>
+        <item>5 Gal Bucket</item>
+        <item>Pack</item>
+        <item>Other</item>
+    </string-array>
+
+    <string-array name="container_type_letters">
+        <item>S</item>
+        <item>L</item>
+        <item>B</item>
+        <item>P</item>
+        <item>O</item>
+    </string-array>
+</resources>

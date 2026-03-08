@@ -1,0 +1,10 @@
+{
+  "version": 3,
+  "artifactType": {
+    "type": "COMPATIBLE_SCREEN_MANIFEST",
+    "kind": "Directory"
+  },
+  "applicationId": "com.yahoo.rob31312.prepscan",
+  "variantName": "debug",
+  "elements": []
+}

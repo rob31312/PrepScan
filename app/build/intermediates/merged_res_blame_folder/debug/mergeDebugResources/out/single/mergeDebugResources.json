@@ -1,0 +1,182 @@
+[
+    {
+        "merged": "com.prepscan.app-debug-33:/drawable_prepscan_logo.png.flat",
+        "source": "com.prepscan.app-main-35:/drawable/prepscan_logo.png"
+    },
+    {
+        "merged": "com.prepscan.app-debug-33:/mipmap-xxhdpi_ic_launcher.png.flat",
+        "source": "com.prepscan.app-main-35:/mipmap-xxhdpi/ic_launcher.png"
+    },
+    {
+        "merged": "com.prepscan.app-debug-33:/layout_activity_add_container.xml.flat",
+        "source": "com.prepscan.app-main-35:/layout/activity_add_container.xml"
+    },
+    {
+        "merged": "com.prepscan.app-debug-33:/mipmap-hdpi_ic_launcher.png.flat",
+        "source": "com.prepscan.app-main-35:/mipmap-hdpi/ic_launcher.png"
+    },
+    {
+        "merged": "com.prepscan.app-debug-33:/mipmap-xhdpi_ic_launcher_round.png.flat",
+        "source": "com.prepscan.app-main-35:/mipmap-xhdpi/ic_launcher_round.png"
+    },
+    {
+        "merged": "com.prepscan.app-debug-33:/menu_menu_topbar_contents.xml.flat",
+        "source": "com.prepscan.app-main-35:/menu/menu_topbar_contents.xml"
+    },
+    {
+        "merged": "com.prepscan.app-debug-33:/mipmap-xxhdpi_ic_launcher_round.png.flat",
+        "source": "com.prepscan.app-main-35:/mipmap-xxhdpi/ic_launcher_round.png"
+    },
+    {
+        "merged": "com.prepscan.app-debug-33:/menu_menu_inventory.xml.flat",
+        "source": "com.prepscan.app-main-35:/menu/menu_inventory.xml"
+    },
+    {
+        "merged": "com.prepscan.app-debug-33:/menu_menu_topbar.xml.flat",
+        "source": "com.prepscan.app-main-35:/menu/menu_topbar.xml"
+    },
+    {
+        "merged": "com.prepscan.app-debug-33:/drawable_label_cell_selector.xml.flat",
+        "source": "com.prepscan.app-main-35:/drawable/label_cell_selector.xml"
+    },
+    {
+        "merged": "com.prepscan.app-debug-33:/drawable_ic_remove.xml.flat",
+        "source": "com.prepscan.app-main-35:/drawable/ic_remove.xml"
+    },
+    {
+        "merged": "com.prepscan.app-debug-33:/mipmap-xxxhdpi_ic_launcher.png.flat",
+        "source": "com.prepscan.app-main-35:/mipmap-xxxhdpi/ic_launcher.png"
+    },
+    {
+        "merged": "com.prepscan.app-debug-33:/drawable_ic_settings.xml.flat",
+        "source": "com.prepscan.app-main-35:/drawable/ic_settings.xml"
+    },
+    {
+        "merged": "com.prepscan.app-debug-33:/mipmap-xhdpi_ic_launcher_foreground.png.flat",
+        "source": "com.prepscan.app-main-35:/mipmap-xhdpi/ic_launcher_foreground.png"
+    },
+    {
+        "merged": "com.prepscan.app-debug-33:/layout_activity_add_contents.xml.flat",
+        "source": "com.prepscan.app-main-35:/layout/activity_add_contents.xml"
+    },
+    {
+        "merged": "com.prepscan.app-debug-33:/mipmap-anydpi-v26_ic_launcher.xml.flat",
+        "source": "com.prepscan.app-main-35:/mipmap-anydpi-v26/ic_launcher.xml"
+    },
+    {
+        "merged": "com.prepscan.app-debug-33:/drawable_ic_arrow_back.xml.flat",
+        "source": "com.prepscan.app-main-35:/drawable/ic_arrow_back.xml"
+    },
+    {
+        "merged": "com.prepscan.app-debug-33:/layout_activity_edit_item.xml.flat",
+        "source": "com.prepscan.app-main-35:/layout/activity_edit_item.xml"
+    },
+    {
+        "merged": "com.prepscan.app-debug-33:/mipmap-hdpi_ic_launcher_round.png.flat",
+        "source": "com.prepscan.app-main-35:/mipmap-hdpi/ic_launcher_round.png"
+    },
+    {
+        "merged": "com.prepscan.app-debug-33:/mipmap-mdpi_ic_launcher_round.png.flat",
+        "source": "com.prepscan.app-main-35:/mipmap-mdpi/ic_launcher_round.png"
+    },
+    {
+        "merged": "com.prepscan.app-debug-33:/mipmap-xxxhdpi_ic_launcher_foreground.png.flat",
+        "source": "com.prepscan.app-main-35:/mipmap-xxxhdpi/ic_launcher_foreground.png"
+    },
+    {
+        "merged": "com.prepscan.app-debug-33:/mipmap-mdpi_ic_launcher.png.flat",
+        "source": "com.prepscan.app-main-35:/mipmap-mdpi/ic_launcher.png"
+    },
+    {
+        "merged": "com.prepscan.app-debug-33:/mipmap-xhdpi_ic_launcher.png.flat",
+        "source": "com.prepscan.app-main-35:/mipmap-xhdpi/ic_launcher.png"
+    },
+    {
+        "merged": "com.prepscan.app-debug-33:/layout_bottom_sheet_container_options.xml.flat",
+        "source": "com.prepscan.app-main-35:/layout/bottom_sheet_container_options.xml"
+    },
+    {
+        "merged": "com.prepscan.app-debug-33:/layout_activity_inventory.xml.flat",
+        "source": "com.prepscan.app-main-35:/layout/activity_inventory.xml"
+    },
+    {
+        "merged": "com.prepscan.app-debug-33:/layout_row_container_checkbox.xml.flat",
+        "source": "com.prepscan.app-main-35:/layout/row_container_checkbox.xml"
+    },
+    {
+        "merged": "com.prepscan.app-debug-33:/xml_file_paths.xml.flat",
+        "source": "com.prepscan.app-main-35:/xml/file_paths.xml"
+    },
+    {
+        "merged": "com.prepscan.app-debug-33:/mipmap-xxhdpi_ic_launcher_foreground.png.flat",
+        "source": "com.prepscan.app-main-35:/mipmap-xxhdpi/ic_launcher_foreground.png"
+    },
+    {
+        "merged": "com.prepscan.app-debug-33:/mipmap-hdpi_ic_launcher_foreground.png.flat",
+        "source": "com.prepscan.app-main-35:/mipmap-hdpi/ic_launcher_foreground.png"
+    },
+    {
+        "merged": "com.prepscan.app-debug-33:/layout_activity_scan_select_container.xml.flat",
+        "source": "com.prepscan.app-main-35:/layout/activity_scan_select_container.xml"
+    },
+    {
+        "merged": "com.prepscan.app-debug-33:/layout_activity_home.xml.flat",
+        "source": "com.prepscan.app-main-35:/layout/activity_home.xml"
+    },
+    {
+        "merged": "com.prepscan.app-debug-33:/layout_row_label_cell.xml.flat",
+        "source": "com.prepscan.app-main-35:/layout/row_label_cell.xml"
+    },
+    {
+        "merged": "com.prepscan.app-debug-33:/drawable_ic_print.xml.flat",
+        "source": "com.prepscan.app-main-35:/drawable/ic_print.xml"
+    },
+    {
+        "merged": "com.prepscan.app-debug-33:/layout_row_content_item.xml.flat",
+        "source": "com.prepscan.app-main-35:/layout/row_content_item.xml"
+    },
+    {
+        "merged": "com.prepscan.app-debug-33:/layout_dialog_edit_location.xml.flat",
+        "source": "com.prepscan.app-main-35:/layout/dialog_edit_location.xml"
+    },
+    {
+        "merged": "com.prepscan.app-debug-33:/drawable_ic_snapshot.xml.flat",
+        "source": "com.prepscan.app-main-35:/drawable/ic_snapshot.xml"
+    },
+    {
+        "merged": "com.prepscan.app-debug-33:/drawable_ps_card_bg.xml.flat",
+        "source": "com.prepscan.app-main-35:/drawable/ps_card_bg.xml"
+    },
+    {
+        "merged": "com.prepscan.app-debug-33:/mipmap-anydpi-v26_ic_launcher_round.xml.flat",
+        "source": "com.prepscan.app-main-35:/mipmap-anydpi-v26/ic_launcher_round.xml"
+    },
+    {
+        "merged": "com.prepscan.app-debug-33:/layout_activity_print_label.xml.flat",
+        "source": "com.prepscan.app-main-35:/layout/activity_print_label.xml"
+    },
+    {
+        "merged": "com.prepscan.app-debug-33:/mipmap-xxxhdpi_ic_launcher_round.png.flat",
+        "source": "com.prepscan.app-main-35:/mipmap-xxxhdpi/ic_launcher_round.png"
+    },
+    {
+        "merged": "com.prepscan.app-debug-33:/layout_activity_printer_setup.xml.flat",
+        "source": "com.prepscan.app-main-35:/layout/activity_printer_setup.xml"
+    },
+    {
+        "merged": "com.prepscan.app-debug-33:/drawable_ic_home.xml.flat",
+        "source": "com.prepscan.app-main-35:/drawable/ic_home.xml"
+    },
+    {
+        "merged": "com.prepscan.app-debug-33:/drawable_ic_add.xml.flat",
+        "source": "com.prepscan.app-main-35:/drawable/ic_add.xml"
+    },
+    {
+        "merged": "com.prepscan.app-debug-33:/mipmap-mdpi_ic_launcher_foreground.png.flat",
+        "source": "com.prepscan.app-main-35:/mipmap-mdpi/ic_launcher_foreground.png"
+    },
+    {
+        "merged": "com.prepscan.app-debug-33:/layout_row_container_select.xml.flat",
+        "source": "com.prepscan.app-main-35:/layout/row_container_select.xml"
+    }
+]

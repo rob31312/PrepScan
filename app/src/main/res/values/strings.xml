@@ -1,0 +1,6 @@
+<resources><string name="app_name">PrepScan</string><string name="home_add_container">Add Container</string><string name="home_scan_container">Scan/Select Container</string><string name="home_inventory">Inventory</string><string name="title_add_container">Add Container</string><string name="title_scan_container">Scan/Select Container</string><string name="title_edit_item">Edit Item</string><string name="title_print_label">Print QR Code</string><string name="title_inventory">Inventory</string><string name="placeholder_qr">QR preview will appear here</string><string name="placeholder_camera">Camera preview placeholder</string>
+    <string name="title_printer_setup">Printer setup</string>
+    <string name="btn_printer_setup">Printer setup</string>
+    <string name="btn_save_settings">Save settings</string>
+    <string name="btn_test_print">Test print</string>
+</resources>

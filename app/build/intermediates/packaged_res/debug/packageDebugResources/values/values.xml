@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources xmlns:ns1="http://schemas.android.com/tools">
+    <string-array name="container_type_letters">
+        <item>S</item>
+        <item>L</item>
+        <item>B</item>
+        <item>P</item>
+        <item>O</item>
+    </string-array>
+    <string-array name="container_type_names">
+        <item>Small Bin</item>
+        <item>Large Bin</item>
+        <item>5 Gal Bucket</item>
+        <item>Pack</item>
+        <item>Other</item>
+    </string-array>
+    <string-array name="content_type_letters">
+        <item>F</item>
+        <item>M</item>
+        <item>C</item>
+        <item>W</item>
+        <item>D</item>
+        <item>S</item>
+        <item>E</item>
+        <item>G</item>
+    </string-array>
+    <string-array name="content_type_names">
+        <item>Food</item>
+        <item>Medical</item>
+        <item>Clothing</item>
+        <item>Water</item>
+        <item>Defense</item>
+        <item>Shelter</item>
+        <item>Electronics</item>
+        <item>General survival gear</item>
+    </string-array>
+    <color name="ic_launcher_background">#FFFFFF</color>
+    <string name="app_name">PrepScan</string>
+    <string name="btn_printer_setup">Printer setup</string>
+    <string name="btn_save_settings">Save settings</string>
+    <string name="btn_test_print">Test print</string>
+    <string name="home_add_container">Add Container</string>
+    <string name="home_inventory">Inventory</string>
+    <string name="home_scan_container">Scan/Select Container</string>
+    <string name="placeholder_camera">Camera preview placeholder</string>
+    <string name="placeholder_qr">QR preview will appear here</string>
+    <string name="title_add_container">Add Container</string>
+    <string name="title_edit_item">Edit Item</string>
+    <string name="title_inventory">Inventory</string>
+    <string name="title_print_label">Print QR Code</string>
+    <string name="title_printer_setup">Printer setup</string>
+    <string name="title_scan_container">Scan/Select Container</string>
+    <style name="Theme.PrepScan" parent="Theme.Material3.DayNight.NoActionBar">
+        <item name="android:statusBarColor">?attr/colorSurface</item>
+        <item name="android:navigationBarColor">?attr/colorSurface</item>
+        <item name="android:windowLightStatusBar" ns1:targetApi="m">true</item>
+    </style>
+</resources>

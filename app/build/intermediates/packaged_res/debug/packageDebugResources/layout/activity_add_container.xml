@@ -1,0 +1,189 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <com.google.android.material.appbar.MaterialToolbar
+        android:id="@+id/topAppBar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="?attr/colorSurface"
+        app:layout_constraintTop_toTopOf="parent"
+        app:menu="@menu/menu_topbar"
+        app:navigationIcon="@drawable/ic_arrow_back"
+        app:titleTextColor="?attr/colorOnSurface" />
+
+    <FrameLayout
+        android:id="@+id/qrPreviewFrame"
+        android:layout_width="182dp"
+        android:layout_height="160dp"
+        android:layout_margin="16dp"
+        android:background="@drawable/ps_card_bg"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/topAppBar">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:text="@string/placeholder_qr" />
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/inpGeneratedName"
+            android:layout_width="61dp"
+            android:layout_height="35dp"
+            android:layout_gravity="center_horizontal"
+            android:background="@null"
+            android:enabled="false"
+            android:text="FS001"
+            android:textAlignment="center"
+            android:textSize="14sp" />
+
+        <ImageView
+        android:id="@+id/imgQrPreview"
+        android:layout_width="140dp"
+        android:layout_height="140dp"
+        android:layout_gravity="center"
+        android:contentDescription="QR preview"
+        android:scaleType="fitCenter" />
+</FrameLayout>
+
+
+
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/spnContentTypeLayout"
+        style="@style/Widget.Material3.TextInputLayout.OutlinedBox.ExposedDropdownMenu"
+        android:layout_width="307dp"
+        android:layout_height="60dp"
+        android:layout_marginTop="12dp"
+        android:layout_weight="1"
+        android:hint="Content type"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.519"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/qrPreviewFrame">
+
+        <com.google.android.material.textfield.MaterialAutoCompleteTextView
+            android:id="@+id/spnContentType"
+            android:layout_width="fill_parent"
+            android:layout_height="50dp"
+            android:importantForAutofill="no"
+            android:inputType="none" />
+
+    </com.google.android.material.textfield.TextInputLayout>
+
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/spnContainerTypeLayout"
+        style="@style/Widget.Material3.TextInputLayout.OutlinedBox.ExposedDropdownMenu"
+        android:layout_width="307dp"
+        android:layout_height="60dp"
+        android:layout_marginTop="12dp"
+        android:layout_weight="1"
+        android:hint="Container type"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.519"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/spnContentTypeLayout">
+
+        <com.google.android.material.textfield.MaterialAutoCompleteTextView
+            android:id="@+id/spnContainerType"
+            android:layout_width="fill_parent"
+            android:layout_height="50dp"
+            android:importantForAutofill="no"
+            android:inputType="none" />
+    </com.google.android.material.textfield.TextInputLayout>
+
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/inpRoomLayout"
+        android:layout_width="145dp"
+        android:layout_height="60dp"
+        android:layout_marginHorizontal="16dp"
+        android:layout_marginStart="40dp"
+        android:layout_marginTop="12dp"
+        android:hint="Room"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/spnContainerTypeLayout">
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/inpRoom"
+            android:layout_width="fill_parent"
+            android:layout_height="50dp" />
+    </com.google.android.material.textfield.TextInputLayout>
+
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/inpRackLayout"
+        android:layout_width="145dp"
+        android:layout_height="60dp"
+        android:layout_marginHorizontal="16dp"
+        android:layout_marginTop="12dp"
+        android:layout_marginEnd="40dp"
+        android:hint="Rack"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/spnContainerTypeLayout">
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/inpRack"
+            android:layout_width="fill_parent"
+            android:layout_height="50dp" />
+    </com.google.android.material.textfield.TextInputLayout>
+
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/inpBayLayout"
+        android:layout_width="145dp"
+        android:layout_height="60dp"
+        android:layout_marginHorizontal="16dp"
+        android:layout_marginStart="40dp"
+        android:layout_marginTop="12dp"
+        android:hint="Bay"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/inpRoomLayout">
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/inpBay"
+            android:layout_width="fill_parent"
+            android:layout_height="50dp" />
+    </com.google.android.material.textfield.TextInputLayout>
+
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/inpShelfLayout"
+        android:layout_width="145dp"
+        android:layout_height="60dp"
+        android:layout_marginHorizontal="16dp"
+        android:layout_marginTop="12dp"
+        android:layout_marginEnd="40dp"
+        android:hint="Shelf"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/inpRackLayout">
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/inpShelf"
+            android:layout_width="fill_parent"
+            android:layout_height="50dp" />
+    </com.google.android.material.textfield.TextInputLayout>
+
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/btnAddRemoveItems"
+        android:layout_width="303dp"
+        android:layout_height="50dp"
+        android:layout_marginHorizontal="16dp"
+        android:layout_marginBottom="10dp"
+        android:text="Add, Remove Items"
+        app:layout_constraintBottom_toTopOf="@+id/btnPrintQr"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/btnPrintQr"
+        android:layout_width="303dp"
+        android:layout_height="50dp"
+        android:layout_marginHorizontal="16dp"
+        android:layout_marginBottom="56dp"
+        android:text="Print QR code"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>
