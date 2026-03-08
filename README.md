@@ -1,10 +1,6 @@
-# PrepScan ( Version)
+# PrepScan
+PrepScan is an app that inventories emergency supplies in containers by scanning containers and items.
 
-* Finalized  version to navigate all screens that will be included in final working version.
-* Plan to use ZXing (Zebra Crossing) open source libraries to handle all QRCodes/barcodes
-* Plan to add SQLight for data handling.
-* Plan to add ability to print.
+The project idea wiki describes the initial concept with some AI generated art for the first wire frame and a wireframe in FIGMA https://github.com/rob31312/PrepScan/wiki/First-draft-of-Project-Idea
 
-- v2026.2: Add Container screen includes  fields for content type, container type, and generated container name preview (sequential numbering logic not implemented yet).
-
-- v2026.3: Add Container category inputs changed to dropdown spinners showing names; generated name preview uses letters ( only). Layout tightened with side-by-side dropdowns.
+The latest updates include a final wire frame built in Android Studio and demonstrates all screens and navigation https://github.com/rob31312/PrepScan/wiki/Final-version-of-Wire-Frame
