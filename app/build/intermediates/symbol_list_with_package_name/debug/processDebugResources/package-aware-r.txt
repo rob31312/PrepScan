@@ -3191,6 +3191,7 @@ id auto
 id autoComplete
 id autoCompleteToEnd
 id autoCompleteToStart
+id barcodeView
 id barrier
 id baseline
 id beginOnFirstDraw
@@ -3204,6 +3205,7 @@ id bounceEnd
 id bounceStart
 id btnAddContainer
 id btnAddRemoveItems
+id btnDelete
 id btnDeleteContainer
 id btnDone
 id btnEditLocation
@@ -3224,7 +3226,6 @@ id btnTestPrint
 id buttonPanel
 id cache_measures
 id callMeasure
-id cameraFrame
 id cancel_button
 id carryVelocity
 id center
@@ -3352,8 +3353,6 @@ id indeterminate
 id info
 id inpBay
 id inpBayLayout
-id inpDesc
-id inpDescLayout
 id inpGeneratedName
 id inpHGap
 id inpHGapLayout
@@ -3512,6 +3511,7 @@ id pressed
 id progress_circular
 id progress_horizontal
 id qrPreviewFrame
+id qrView
 id qtyContainer
 id qtyRow
 id radio

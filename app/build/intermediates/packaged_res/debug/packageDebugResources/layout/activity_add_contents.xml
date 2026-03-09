@@ -13,22 +13,14 @@
         app:navigationIcon="@drawable/ic_arrow_back"
         app:menu="@menu/menu_topbar_contents"/>
 
-    <FrameLayout
-        android:id="@+id/cameraFrame"
+    <com.journeyapps.barcodescanner.DecoratedBarcodeView
+        android:id="@+id/barcodeView"
         android:layout_width="0dp"
-        android:layout_height="220dp"
+        android:layout_height="200dp"
         android:layout_margin="16dp"
-        android:background="@drawable/ps_card_bg"
         app:layout_constraintTop_toBottomOf="@id/topAppBar"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent">
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@string/placeholder_camera"
-            android:layout_gravity="center"/>
-    </FrameLayout>
+        app:layout_constraintEnd_toEndOf="parent" />
 
     <TextView
         android:id="@+id/txtContainerHeader"
@@ -37,7 +29,7 @@
         android:layout_marginHorizontal="16dp"
         android:text="Container contents ()"
         android:textStyle="bold"
-        app:layout_constraintTop_toBottomOf="@id/cameraFrame"
+        app:layout_constraintTop_toBottomOf="@id/barcodeView"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"/>
 

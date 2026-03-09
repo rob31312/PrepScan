@@ -19,8 +19,10 @@ id action_container_options
 id action_home
 id action_print_supplies
 id action_snapshot_inventory
+id barcodeView
 id btnAddContainer
 id btnAddRemoveItems
+id btnDelete
 id btnDeleteContainer
 id btnDone
 id btnEditLocation
@@ -38,15 +40,12 @@ id btnScanContainer
 id btnSetupPrinter
 id btnTakePhoto
 id btnTestPrint
-id cameraFrame
 id chkContainer
 id imgItem
 id imgLogo
 id imgQrPreview
 id inpBay
 id inpBayLayout
-id inpDesc
-id inpDescLayout
 id inpGeneratedName
 id inpHGap
 id inpHGapLayout
@@ -72,6 +71,7 @@ id inpVGap
 id inpVGapLayout
 id labelCellRoot
 id qrPreviewFrame
+id qrView
 id qtyContainer
 id qtyRow
 id recyclerContainers

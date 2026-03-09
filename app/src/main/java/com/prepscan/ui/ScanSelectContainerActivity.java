@@ -2,21 +2,26 @@ package com.prepscan.ui;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.view.View;
 
-import androidx.activity.result.ActivityResultLauncher;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.journeyapps.barcodescanner.ScanContract;
-import com.journeyapps.barcodescanner.ScanOptions;
+import com.google.zxing.BarcodeFormat;
+import com.journeyapps.barcodescanner.BarcodeCallback;
+import com.journeyapps.barcodescanner.BarcodeResult;
+import com.journeyapps.barcodescanner.DecoratedBarcodeView;
+import com.journeyapps.barcodescanner.DefaultDecoderFactory;
 import com.prepscan.R;
 import com.prepscan.data.PrepScanRepository;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 public class ScanSelectContainerActivity extends BaseActivity {
+
+    private String lastScan = null;
+    private long lastScanTs = 0;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -26,26 +31,24 @@ public class ScanSelectContainerActivity extends BaseActivity {
 
         PrepScanRepository repo = new PrepScanRepository(this);
 
-        ActivityResultLauncher<ScanOptions> qrLauncher = registerForActivityResult(
-                new ScanContract(),
-                result -> {
-                    if (result.getContents() == null) return;
-                    String scanned = result.getContents().trim();
-                    Intent i = new Intent(this, AddContentsActivity.class);
-                    i.putExtra(AddContentsActivity.EXTRA_CONTAINER_ID, scanned);
-                    startActivity(i);
-                }
-        );
+        // Live QR scanning inside the preview box
+        DecoratedBarcodeView qrView = findViewById(R.id.qrView);
+        if (qrView != null) {
+            qrView.getBarcodeView().setDecoderFactory(new DefaultDecoderFactory(Collections.singletonList(BarcodeFormat.QR_CODE)));
+            qrView.decodeContinuous(new BarcodeCallback() {
+                @Override
+                public void barcodeResult(BarcodeResult result) {
+                    if (result == null || result.getText() == null) return;
+                    String code = result.getText().trim();
+                    if (code.isEmpty()) return;
 
-        View cameraFrame = findViewById(R.id.cameraFrame);
-        if (cameraFrame != null) {
-            cameraFrame.setOnClickListener(v -> {
-                ScanOptions opt = new ScanOptions();
-                opt.setDesiredBarcodeFormats(ScanOptions.QR_CODE);
-                opt.setPrompt("Scan container QR");
-                opt.setBeepEnabled(true);
-                opt.setOrientationLocked(false);
-                qrLauncher.launch(opt);
+                    long now = System.currentTimeMillis();
+                    if (code.equals(lastScan) && (now - lastScanTs) < 1500) return;
+                    lastScan = code;
+                    lastScanTs = now;
+
+                    openContainer(code);
+                }
             });
         }
 
@@ -60,12 +63,27 @@ public class ScanSelectContainerActivity extends BaseActivity {
             rows.add(new ContainerPickRow("FS001", "Example only (no containers yet)"));
         }
 
-        ContainerPickAdapter adapter = new ContainerPickAdapter(rows, row -> {
-            Intent i = new Intent(this, AddContentsActivity.class);
-            i.putExtra(AddContentsActivity.EXTRA_CONTAINER_ID, row.id);
-            startActivity(i);
-        });
-
+        ContainerPickAdapter adapter = new ContainerPickAdapter(rows, row -> openContainer(row.id));
         recycler.setAdapter(adapter);
+    }
+
+    private void openContainer(String containerId) {
+        Intent i = new Intent(this, AddContentsActivity.class);
+        i.putExtra(AddContentsActivity.EXTRA_CONTAINER_ID, containerId);
+        startActivity(i);
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        DecoratedBarcodeView bv = findViewById(R.id.qrView);
+        if (bv != null) bv.resume();
+    }
+
+    @Override
+    protected void onPause() {
+        DecoratedBarcodeView bv = findViewById(R.id.qrView);
+        if (bv != null) bv.pause();
+        super.onPause();
     }
 }

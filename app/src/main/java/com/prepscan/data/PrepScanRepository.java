@@ -219,4 +219,8 @@ public void updateContainerLocation(String id, @Nullable String room, @Nullable 
     db().update("containers", v, "id=?", new String[]{id});
 }
 
+    public void deleteContainerItem(String containerId, String barcode) {
+        db().delete("container_items", "container_id=? AND barcode=?", new String[]{containerId, barcode});
+    }
+
 }

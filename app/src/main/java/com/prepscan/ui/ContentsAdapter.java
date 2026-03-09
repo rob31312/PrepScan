@@ -17,7 +17,7 @@ import java.util.List;
 public class ContentsAdapter extends RecyclerView.Adapter<ContentsAdapter.VH> {
 
     public interface OnUnknownBarcodeFlow {
-        void openEditItem();
+        void openEditItem(String barcode);
     }
 
     private final List<PrepScanRepository.ContainerItemRow> rows;
@@ -54,10 +54,21 @@ public class ContentsAdapter extends RecyclerView.Adapter<ContentsAdapter.VH> {
         holder.btnPlus.setOnClickListener(v -> {
             row.qty++;
             if (repo != null) repo.setContainerItemQty(containerId, row.barcode, row.qty);
-            holder.txtQty.setText(String.valueOf(row.qty));
+            
+
+        if (holder.btnDelete != null) {
+            holder.btnDelete.setOnClickListener(vv -> {
+                int p = holder.getBindingAdapterPosition();
+                if (p == RecyclerView.NO_POSITION) return;
+                if (repo != null) repo.deleteContainerItem(containerId, row.barcode);
+                rows.remove(p);
+                notifyItemRemoved(p);
+            });
+        }
+holder.txtQty.setText(String.valueOf(row.qty));
         });
 
-        holder.txtName.setOnClickListener(v -> flow.openEditItem());
+        holder.txtName.setOnClickListener(v -> flow.openEditItem(row.barcode));
     }
 
     @Override
@@ -70,6 +81,7 @@ public class ContentsAdapter extends RecyclerView.Adapter<ContentsAdapter.VH> {
         TextView txtQty;
         MaterialButton btnMinus;
         MaterialButton btnPlus;
+        MaterialButton btnDelete;
 
         VH(@NonNull View itemView) {
             super(itemView);
@@ -77,6 +89,7 @@ public class ContentsAdapter extends RecyclerView.Adapter<ContentsAdapter.VH> {
             txtQty = itemView.findViewById(R.id.txtQty);
             btnMinus = itemView.findViewById(R.id.btnMinus);
             btnPlus = itemView.findViewById(R.id.btnPlus);
+            btnDelete = itemView.findViewById(R.id.btnDelete);
         }
     }
 }

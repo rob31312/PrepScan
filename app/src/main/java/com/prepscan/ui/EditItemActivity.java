@@ -44,8 +44,6 @@ public class EditItemActivity extends BaseActivity {
         MaterialButton btnTakePhoto = findViewById(R.id.btnTakePhoto);
 
         EditText inpName = findViewById(R.id.inpName);
-        EditText inpDesc = findViewById(R.id.inpDesc);
-
         TextView txtQty = findViewById(R.id.txtQty);
         MaterialButton btnMinus = findViewById(R.id.btnQtyMinus);
         MaterialButton btnPlus = findViewById(R.id.btnQtyPlus);
@@ -63,9 +61,7 @@ public class EditItemActivity extends BaseActivity {
         // If item already exists, prefill fields
         PrepScanRepository.Item existing = repo.getItem(barcode);
         if (existing != null) {
-            if (existing.name != null) inpName.setText(existing.name);
-            if (existing.description != null) inpDesc.setText(existing.description);
-            if (existing.photoUri != null) {
+            if (existing.name != null) inpName.setText(existing.name);            if (existing.photoUri != null) {
                 try {
                     photoUri = Uri.parse(existing.photoUri);
                     imgItem.setImageURI(photoUri);
@@ -104,8 +100,8 @@ public class EditItemActivity extends BaseActivity {
 
         btnSave.setOnClickListener(v -> {
             String name = inpName.getText() != null ? inpName.getText().toString().trim() : null;
-            String desc = inpDesc.getText() != null ? inpDesc.getText().toString().trim() : null;
-            String photo = photoUri != null ? photoUri.toString() : null;
+        String desc = null;
+String photo = photoUri != null ? photoUri.toString() : null;
 
             repo.upsertItem(barcode, name, desc, photo);
 

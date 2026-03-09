@@ -13,12 +13,17 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.google.android.material.bottomsheet.BottomSheetDialog;
-import com.journeyapps.barcodescanner.ScanContract;
-import com.journeyapps.barcodescanner.ScanOptions;
+import com.google.zxing.BarcodeFormat;
+import com.journeyapps.barcodescanner.BarcodeCallback;
+import com.journeyapps.barcodescanner.BarcodeResult;
+import com.journeyapps.barcodescanner.DecoratedBarcodeView;
+import com.journeyapps.barcodescanner.DefaultDecoderFactory;
 import com.prepscan.R;
 import com.prepscan.data.PrepScanRepository;
 
 import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
 
 public class AddContentsActivity extends BaseActivity {
 
@@ -27,17 +32,20 @@ public class AddContentsActivity extends BaseActivity {
     private String containerId = "FS001";
 
     private PrepScanRepository repo;
-    private final java.util.List<PrepScanRepository.ContainerItemRow> rows = new ArrayList<>();
+    private final List<PrepScanRepository.ContainerItemRow> rows = new ArrayList<>();
     private ContentsAdapter adapter;
 
     private ActivityResultLauncher<Intent> editItemLauncher;
+
+    private String lastScan = null;
+    private long lastScanTs = 0;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_add_contents);
 
-        if (getIntent() != null && getIntent().hasExtra(EXTRA_CONTAINER_ID)) {
+        if (getIntent() != null) {
             String incoming = getIntent().getStringExtra(EXTRA_CONTAINER_ID);
             if (incoming != null && !incoming.trim().isEmpty()) containerId = incoming.trim();
         }
@@ -51,9 +59,14 @@ public class AddContentsActivity extends BaseActivity {
 
         rows.clear();
         rows.addAll(repo.listContainerItems(containerId));
-        adapter = new ContentsAdapter(rows, repo, containerId, () -> {
-            // open edit item without barcode not supported
+
+        adapter = new ContentsAdapter(rows, repo, containerId, (barcode) -> {
+            Intent i = new Intent(this, EditItemActivity.class);
+            i.putExtra(EditItemActivity.EXTRA_BARCODE, barcode);
+            i.putExtra(EditItemActivity.EXTRA_CONTAINER_ID, containerId);
+            editItemLauncher.launch(i);
         });
+
         recycler.setAdapter(adapter);
 
         editItemLauncher = registerForActivityResult(
@@ -65,42 +78,56 @@ public class AddContentsActivity extends BaseActivity {
                 }
         );
 
-        ActivityResultLauncher<ScanOptions> itemLauncher = registerForActivityResult(
-                new ScanContract(),
-                result -> {
-                    if (result.getContents() == null) return;
-                    String barcode = result.getContents().trim();
+        // Live scanner inside the camera placeholder box
+        DecoratedBarcodeView barcodeView = findViewById(R.id.barcodeView);
+        if (barcodeView != null) {
+            List<BarcodeFormat> formats = Arrays.asList(
+                    BarcodeFormat.UPC_A, BarcodeFormat.UPC_E, BarcodeFormat.EAN_13, BarcodeFormat.EAN_8,
+                    BarcodeFormat.CODE_39, BarcodeFormat.CODE_93, BarcodeFormat.CODE_128, BarcodeFormat.ITF,
+                    BarcodeFormat.CODABAR, BarcodeFormat.QR_CODE
+            );
+            barcodeView.getBarcodeView().setDecoderFactory(new DefaultDecoderFactory(formats));
+            barcodeView.decodeContinuous(new BarcodeCallback() {
+                @Override
+                public void barcodeResult(BarcodeResult result) {
+                    if (result == null || result.getText() == null) return;
+                    String code = result.getText().trim();
+                    if (code.isEmpty()) return;
 
-                    PrepScanRepository.Item item = repo.getItem(barcode);
-                    if (item == null) {
-                        Intent i = new Intent(this, EditItemActivity.class);
-                        i.putExtra(EditItemActivity.EXTRA_BARCODE, barcode);
-                        i.putExtra(EditItemActivity.EXTRA_CONTAINER_ID, containerId);
-                        editItemLauncher.launch(i);
-                        return;
-                    }
+                    long now = System.currentTimeMillis();
+                    if (code.equals(lastScan) && (now - lastScanTs) < 1500) return;
+                    lastScan = code;
+                    lastScanTs = now;
 
-                    // Increment qty for existing item
-                    int newQty = 1;
-                    for (PrepScanRepository.ContainerItemRow r : repo.listContainerItems(containerId)) {
-                        if (r.barcode.equals(barcode)) { newQty = r.qty + 1; break; }
-                    }
-                    repo.setContainerItemQty(containerId, barcode, newQty);
-                    refreshList();
+                    handleScannedBarcode(code);
                 }
-        );
-
-        View cameraFrame = findViewById(R.id.cameraFrame);
-        if (cameraFrame != null) {
-            cameraFrame.setOnClickListener(v -> {
-                ScanOptions opt = new ScanOptions();
-                opt.setDesiredBarcodeFormats(ScanOptions.ALL_CODE_TYPES);
-                opt.setPrompt("Scan item barcode");
-                opt.setBeepEnabled(true);
-                opt.setOrientationLocked(false);
-                itemLauncher.launch(opt);
             });
         }
+    }
+
+    private void handleScannedBarcode(String barcode) {
+        PrepScanRepository.Item item = repo.getItem(barcode);
+
+        if (item == null) {
+            Intent i = new Intent(this, EditItemActivity.class);
+            i.putExtra(EditItemActivity.EXTRA_BARCODE, barcode);
+            i.putExtra(EditItemActivity.EXTRA_CONTAINER_ID, containerId);
+            editItemLauncher.launch(i);
+            return;
+        }
+
+        int newQty = 1;
+        for (PrepScanRepository.ContainerItemRow r : repo.listContainerItems(containerId)) {
+            if (r.barcode.equals(barcode)) { newQty = r.qty + 1; break; }
+        }
+        repo.setContainerItemQty(containerId, barcode, newQty);
+        refreshList();
+    }
+
+    private void refreshList() {
+        rows.clear();
+        rows.addAll(repo.listContainerItems(containerId));
+        if (adapter != null) adapter.notifyDataSetChanged();
     }
 
     @Override
@@ -135,39 +162,38 @@ public class AddContentsActivity extends BaseActivity {
     }
 
     private void showEditLocationDialog() {
-    View v = LayoutInflater.from(this).inflate(R.layout.dialog_edit_location, null, false);
+        View v = LayoutInflater.from(this).inflate(R.layout.dialog_edit_location, null, false);
 
-    com.google.android.material.textfield.TextInputEditText inpRoom = v.findViewById(R.id.inpRoom);
-    com.google.android.material.textfield.TextInputEditText inpRack = v.findViewById(R.id.inpRack);
-    com.google.android.material.textfield.TextInputEditText inpBay = v.findViewById(R.id.inpBay);
-    com.google.android.material.textfield.TextInputEditText inpShelf = v.findViewById(R.id.inpShelf);
+        com.google.android.material.textfield.TextInputEditText inpRoom = v.findViewById(R.id.inpRoom);
+        com.google.android.material.textfield.TextInputEditText inpRack = v.findViewById(R.id.inpRack);
+        com.google.android.material.textfield.TextInputEditText inpBay = v.findViewById(R.id.inpBay);
+        com.google.android.material.textfield.TextInputEditText inpShelf = v.findViewById(R.id.inpShelf);
 
-    PrepScanRepository.ContainerInfo info = repo.getContainer(containerId);
-    if (info != null) {
-        if (inpRoom != null) inpRoom.setText(info.room);
-        if (inpRack != null) inpRack.setText(info.rack);
-        if (inpBay != null) inpBay.setText(info.bay);
-        if (inpShelf != null) inpShelf.setText(info.shelf);
+        PrepScanRepository.ContainerInfo info = repo.getContainer(containerId);
+        if (info != null) {
+            if (inpRoom != null) inpRoom.setText(info.room);
+            if (inpRack != null) inpRack.setText(info.rack);
+            if (inpBay != null) inpBay.setText(info.bay);
+            if (inpShelf != null) inpShelf.setText(info.shelf);
+        }
+
+        new AlertDialog.Builder(this)
+                .setTitle("Edit location, " + containerId)
+                .setView(v)
+                .setPositiveButton("Done", (d, which) -> {
+                    String room = (inpRoom != null && inpRoom.getText() != null) ? inpRoom.getText().toString().trim() : null;
+                    String rack = (inpRack != null && inpRack.getText() != null) ? inpRack.getText().toString().trim() : null;
+                    String bay = (inpBay != null && inpBay.getText() != null) ? inpBay.getText().toString().trim() : null;
+                    String shelf = (inpShelf != null && inpShelf.getText() != null) ? inpShelf.getText().toString().trim() : null;
+
+                    repo.updateContainerLocation(containerId, room, rack, bay, shelf);
+                    Toast.makeText(this, "Location updated.", Toast.LENGTH_SHORT).show();
+                })
+                .setNegativeButton("Cancel", null)
+                .show();
     }
 
-    new AlertDialog.Builder(this)
-            .setTitle("Edit location, " + containerId)
-            .setView(v)
-            .setPositiveButton("Done", (d, which) -> {
-                String room = inpRoom != null && inpRoom.getText()!=null ? inpRoom.getText().toString().trim() : null;
-                String rack = inpRack != null && inpRack.getText()!=null ? inpRack.getText().toString().trim() : null;
-                String bay = inpBay != null && inpBay.getText()!=null ? inpBay.getText().toString().trim() : null;
-                String shelf = inpShelf != null && inpShelf.getText()!=null ? inpShelf.getText().toString().trim() : null;
-
-                repo.updateContainerLocation(containerId, room, rack, bay, shelf);
-                refreshList();
-                Toast.makeText(this, "Location updated.", Toast.LENGTH_SHORT).show();
-            })
-            .setNegativeButton("Cancel", null)
-            .show();
-}
-
-private void showDeleteConfirm() {
+    private void showDeleteConfirm() {
         new AlertDialog.Builder(this)
                 .setTitle("Delete container?")
                 .setMessage("Delete " + containerId + " and its contents?")
@@ -182,9 +208,17 @@ private void showDeleteConfirm() {
                 .show();
     }
 
-    private void refreshList() {
-        rows.clear();
-        rows.addAll(repo.listContainerItems(containerId));
-        if (adapter != null) adapter.notifyDataSetChanged();
+    @Override
+    protected void onResume() {
+        super.onResume();
+        DecoratedBarcodeView bv = findViewById(R.id.barcodeView);
+        if (bv != null) bv.resume();
+    }
+
+    @Override
+    protected void onPause() {
+        DecoratedBarcodeView bv = findViewById(R.id.barcodeView);
+        if (bv != null) bv.pause();
+        super.onPause();
     }
 }
